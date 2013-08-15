@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<dataConfig>
+ <dataSource type="JdbcDataSource" driver="com.mysql.jdbc.Driver"
+                     url="jdbc:mysql://localhost:3306/nutch" 
+                        user="root" password="mysqlpw"/>
+ <document>
+     <entity name="id" 
+          query="select baseUrl, title, text, LastMod from masterdb_test">
+        <field column="baseUrl" name="baseUrl"/>
+        <field column="title" name="title"/>
+        <field column="text" name="text"/>
+		<field column="LastMod" name="LastMod"/>
+     </entity>
+ </document>
+</dataConfig>
