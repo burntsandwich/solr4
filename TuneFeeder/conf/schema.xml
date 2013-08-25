@@ -107,9 +107,11 @@
    -->
         
 		<field name="baseUrl" type="text_general" stored="true" indexed="true"/>
-        <field name="title" type="text_general" stored="true" indexed="true" termVectors="true"/>
-        <field name="text" type="text_general" stored="true" indexed="true" termVectors="true"/>
+    <field name="title" type="text_general" stored="true" indexed="true"/>
+    <field name="text" type="text_general" stored="true" indexed="true"/>
 		<field name="LastMod" type="tdate" stored="true" indexed="true"/>
+    <field name="ftitle" type="text_keywords" stored="true" indexed="true"/>
+    <field name="ftext" type="text_keywords" stored="true" indexed="true"/>
 
 
    <!-- Common metadata fields, named specifically to match up with
@@ -251,6 +253,8 @@
    <copyField source="features" dest="text"/>
    <copyField source="includes" dest="text"/>
    <copyField source="manu" dest="manu_exact"/> -->
+   <copyField source="title" dest="ftitle"/>
+   <copyField source="text" dest="ftext"/>
 
    <!-- Copy the price into a currency enabled field (default USD) -->
    <!-- <copyField source="price" dest="price_c"/> -->
@@ -432,11 +436,30 @@
     <fieldType name="text_general" class="solr.TextField" positionIncrementGap="100">
       <analyzer type="index">
         <tokenizer class="solr.StandardTokenizerFactory"/>
-        <filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords.txt" enablePositionIncrements="true" />
-        <!-- in this example, we will only use synonyms at query time
+        <!--<filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords.txt" enablePositionIncrements="true" />
+         in this example, we will only use synonyms at query time
         <filter class="solr.SynonymFilterFactory" synonyms="index_synonyms.txt" ignoreCase="true" expand="false"/>
         -->
         <filter class="solr.LowerCaseFilterFactory"/>
+      </analyzer>
+      <analyzer type="query">
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.StopFilterFactory" ignoreCase="true" words="stopwords.txt" enablePositionIncrements="true" />
+        <filter class="solr.SynonymFilterFactory" synonyms="synonyms.txt" ignoreCase="true" expand="true"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+      </analyzer>
+    </fieldType>
+
+    <fieldType name="text_keywords" class="solr.TextField" positionIncrementGap="100">
+      <!-- A custom field type for stripping out all common words and leaving only keywords. Used for faceting. -->
+      <analyzer type="index">
+        <tokenizer class="solr.StandardTokenizerFactory"/>
+        <filter class="solr.LowerCaseFilterFactory"/>
+        <filter class="solr.StopFilterFactory"
+                ignoreCase="true"
+                words="stopwords_aggressive.txt"
+                enablePositionIncrements="false"
+                />
       </analyzer>
       <analyzer type="query">
         <tokenizer class="solr.StandardTokenizerFactory"/>

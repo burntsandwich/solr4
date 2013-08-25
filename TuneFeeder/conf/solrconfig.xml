@@ -832,7 +832,7 @@
 	   <str name="fl">
 		title, text, baseUrl, LastMod
 		</str>
-     </lst> 
+     </lst>
     <!-- In addition to defaults, "appends" params can be specified
          to identify values which should be appended to the list of
          multi-val params from the query (or the existing "defaults").
