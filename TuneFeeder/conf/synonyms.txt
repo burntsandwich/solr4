@@ -27,3 +27,16 @@ Television, Televisions, TV, TVs
 # Synonym mappings can be used for spelling correction too
 pixima => pixma
 
+
+hiphop, hip, hop, hip-hop,
+melodic, melody, melodies
+lyrical, lyrics
+collaboration, collaborate
+drop, drops
+performance, perform
+remix, remixe, remixes
+beats, beat
+rap, rapper
+synths, synth
+vocals, vocal
+folk, folky, folksy
