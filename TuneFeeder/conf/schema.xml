@@ -451,7 +451,7 @@
     </fieldType>
 
     <fieldType name="text_keywords" class="solr.TextField" positionIncrementGap="100">
-      <!-- A custom field type for stripping out all common words and leaving only keywords. Used for faceting. -->
+      <!-- A custom field type for stripping out all basic words and leaving only music-relevant keywords. Used for faceting. -->
       <analyzer type="index">
         <tokenizer class="solr.StandardTokenizerFactory"/>
         <filter class="solr.LowerCaseFilterFactory"/>
@@ -460,6 +460,7 @@
                 words="stopwords_aggressive.txt"
                 enablePositionIncrements="false"
                 />
+        <filter class="solr.SynonymFilterFactory" synonyms="synonyms.txt" ignoreCase="true" expand="false"/>
       </analyzer>
       <analyzer type="query">
         <tokenizer class="solr.StandardTokenizerFactory"/>
