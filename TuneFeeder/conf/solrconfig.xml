@@ -833,7 +833,9 @@
 		   title, text, baseUrl, LastMod
 		    </str>
         
-        <!-- Highlighting defaults -->
+       <str name="facet.limit">200</str>
+
+       <!-- Highlighting defaults -->
        <str name="hl">on</str>
        <str name="hl.fl">title text</str>
        <str name="hl.fragsize">0</str>
